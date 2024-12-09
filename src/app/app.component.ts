@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import {SideNavComponent} from './side-nav/side-nav.component';
 
-import {HomeComponent} from './home/home.component';
 
 @Component({
   selector: 'app-root',
-  imports: [  HomeComponent],
+  standalone: true,
+  imports: [SideNavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
