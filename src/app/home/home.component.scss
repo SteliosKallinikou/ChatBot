@@ -1,0 +1,41 @@
+
+textarea{
+  border: 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  padding-top: 10px;
+  width: 80%;
+}
+button{
+  border: 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  background: transparent;
+  margin-left: 1px;
+}
+.container{
+  display: flex;
+  padding: 0 500px 0 500px;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 2;
+  box-sizing: border-box;
+}
+p{
+  text-align: end;
+}
+.sub{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+div{
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.reply{
+  text-align: start;
+}

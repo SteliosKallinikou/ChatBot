@@ -1,0 +1,19 @@
+<h1 style="text-align: center; margin-bottom: 50px">General Chat-Bot</h1>
+<div class="container">
+  <div>
+    @for (message of chatMessages; track $index) {
+      <p style="align-items: end">You: {{promts[$index]}}</p>
+      @if (isLoading) {
+        <mat-progress-bar mode="buffer"></mat-progress-bar>
+      }
+      <div class="reply">
+        Chat: {{message}}
+      </div>
+    }
+  </div>
+  <div class="sub">
+    <textarea [(ngModel)]=promt (keydown.enter)="getComplete(promt)" rows="2" cols="55" placeholder="Ask Me Anything!?"></textarea>
+    <button>Generate</button>
+  </div>
+</div>
+
