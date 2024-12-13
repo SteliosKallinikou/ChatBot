@@ -1,0 +1,22 @@
+<h1 class="title">Music Assistant</h1>
+
+<div class="container">
+  <div>
+    @for (message of chatMessages; track $index) {
+      <p class="user-input-display"><b>You:</b> {{promts[$index]}}</p>
+      <div class="reply">
+        <b>Chat: </b>{{message}}
+      </div>
+    }
+    @if (isLoading) {
+      <div class="loader-container">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    }
+
+  </div>
+  <div class="submit">
+    <textarea class="input" [(ngModel)]=promt (keydown.enter)="getComplete(promt)" rows="2" cols="55" placeholder="Ask Me Anything about Music!?"></textarea>
+    <button class="submit-button" (click)="getComplete(promt)" >Generate</button>
+  </div>
+</div>
