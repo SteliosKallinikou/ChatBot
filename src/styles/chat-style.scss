@@ -1,0 +1,60 @@
+@use 'variables';
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 2;
+  box-sizing: border-box;
+  @media screen and (max-width: 570px) {
+    width: 90%;
+  }
+  .input{
+    border: variables.$extra-small solid;
+    border-radius: variables.$medium-plus;
+    text-align: center;
+    padding-top: variables.$small-plus;
+    width: 90%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+  }
+  .submit-button{
+    border: variables.$extra-small solid;
+    border-radius: variables.$medium-plus;
+    text-align: center;
+    background: transparent;
+    margin-left: 1px;
+  }
+}
+.user-input-display{
+  padding-right: 130px;
+  text-align: end;
+}
+.submit{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+div{
+  text-align: center;
+}
+
+.reply{
+  text-align: start;
+  padding: 0 50px variables.$small-plus;
+
+}
+
+.title{
+  text-align: center;
+  margin-bottom: variables.$extra-large;
+}
+
+.loader-container{
+  color: #8341c1;
+}

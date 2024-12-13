@@ -3,7 +3,7 @@ mat-sidenav-container{
   height: calc(205vh - 105vh);
 }
 mat-sidenav{
-  width: 200px;
+  width: 300px;
   background-color: #8341c1;
   text-align: center;
 }
@@ -16,4 +16,8 @@ label{
   color: white;
   text-decoration: underline;
   font-size: 16pt;
+}
+
+button{
+  font-size: 18pt;
 }
