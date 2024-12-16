@@ -1,33 +1,46 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {ChatBotAiService} from '../service/chat-bot-ai.service';
-import {HomeComponent} from '../home/home.component';
+import {HighlightPipe} from '../../pipes/highlight.pipe';
+import {MatProgressBar} from '@angular/material/progress-bar';
+import {StateService} from '../service/state-service';
 
 @Component({
   selector: 'app-math',
   imports: [
     FormsModule,
-    HomeComponent
+    HighlightPipe,
+    MatProgressBar
   ],
   templateUrl: './math.component.html',
   styleUrl: './math.component.scss'
 })
-export class MathComponent {
-  promt = ''
-  response: string | undefined
-  chatMessages: string[]=[]
-  promts: string[]=[]
+export class MathComponent implements OnInit{
+  messages:{sender: string, message: string|null}[]=[]
+  stateService= inject(StateService)
+  AIService = inject(ChatBotAiService)
+  promt: string=''
   isLoading=false
-  constructor(private AIService: ChatBotAiService) {
+
+  ngOnInit() {
+    const state = this.stateService.getState("Math")
+    this.messages=state.messages
   }
-  async getComplete(input:string) {
+
+  async sendMessage(userMessage: string){
+    this.messages.push({sender: 'user', message: userMessage});
     this.isLoading=true
-    this.response = await this.AIService.getResponse(this.promt).then()
-    this.promts.push(input)
-    if (this.response != null) {
-      this.isLoading=false
-      this.chatMessages.push(this.response)
-      this.promt=""
+    const botMessage = await this.AIService.createMathAssistant(userMessage).then()
+    if(botMessage!=null){
+      this.messages.push({sender: 'bot', message: botMessage});
     }
+
+    this.isLoading=false
+    this.stateService.saveState({messages: this.messages},"Math");
+    this.promt=""
+  }
+  ClearChat(){
+    this.stateService.clearService("Math")
+    this.messages=[]
   }
 }

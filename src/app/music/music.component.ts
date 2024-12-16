@@ -32,11 +32,9 @@ export class MusicComponent implements OnInit{
   async sendMessage(userMessage: string){
     this.messages.push({sender: 'user', message: userMessage});
     this.isLoading=true
-    const botMessage = await this.AIService.createAssistant(userMessage).then()
+    const botMessage = await this.AIService.createMusicAssistant(userMessage).then()
     if(botMessage!=null){
       this.messages.push({sender:'bot', message:botMessage})
-    }else {
-      this.messages.push({sender:'bot', message:"Error no Message found"})
     }
     this.isLoading=false
     this.stateService.saveState({messages: this.messages},"music");

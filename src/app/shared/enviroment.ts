@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  openaiApiKey: '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'
+  openaiApiKey: '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'
 }

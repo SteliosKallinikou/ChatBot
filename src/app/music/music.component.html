@@ -2,23 +2,22 @@
 <div class="container">
   <div class="message">
     @for (message of messages; track $index) {
-      @if (messages[$index].sender=="user"){
+      @if (message.sender=="user"){
         <div class="user-input-display">
           <h3><b>You:</b></h3>
-          <p class="user-text">{{messages[$index].message}}</p>
+          <p class="user-text">{{message.message}}</p>
         </div>
-      } @else if (messages[$index].sender=="bot"){
+      } @else if (message.sender=="bot"){
         <div class="reply">
           <h3><b>Chat: </b></h3>
           <p  [innerHTML]="message.message!|highlight" ></p>
           <hr>
         </div>
       }
-    }
-
-    @if(messages.length==0){
+    } @empty {
       <h3>Ask me Anything about Music that you would like to know i am your personal Music Assistant</h3>
     }
+
 
     @if (isLoading) {
       <div class="loader-container">
