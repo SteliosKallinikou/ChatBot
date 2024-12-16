@@ -1,7 +1,9 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ChatBotAiService} from '../service/chat-bot-ai.service';
 import {FormsModule} from '@angular/forms';
 import {MatProgressBar} from '@angular/material/progress-bar';
+import {StateService} from '../service/state-service';
+import {HighlightPipe} from '../../pipes/highlight.pipe';
 
 
 @Component({
@@ -9,27 +11,40 @@ import {MatProgressBar} from '@angular/material/progress-bar';
   imports: [
     FormsModule,
     MatProgressBar,
+    HighlightPipe,
   ],
   templateUrl: './music.component.html',
   styleUrl: './music.component.scss'
 })
-export class MusicComponent {
-  AiService = inject(ChatBotAiService)
-  promt = ''
-  response: string | undefined
-  chatMessages: string[]=[]
-  promts: string[]=[]
+export class MusicComponent implements OnInit{
+  messages:{sender: string, message: string|null}[]=[]
+  stateService= inject(StateService)
+  AIService = inject(ChatBotAiService)
+  promt: string=''
   isLoading=false
 
-  async getComplete(input:string) {
+
+  ngOnInit() {
+    const state = this.stateService.getState("music")
+    this.messages=state.messages
+  }
+
+  async sendMessage(userMessage: string){
+    this.messages.push({sender: 'user', message: userMessage});
     this.isLoading=true
-    this.response = await this.AiService.createAssistant(this.promt).then()
-    this.promts.push(input)
-    if (this.response != null) {
-      this.isLoading=false
-      this.chatMessages.push(this.response)
-      this.promt=""
+    const botMessage = await this.AIService.createAssistant(userMessage).then()
+    if(botMessage!=null){
+      this.messages.push({sender:'bot', message:botMessage})
+    }else {
+      this.messages.push({sender:'bot', message:"Error no Message found"})
     }
+    this.isLoading=false
+    this.stateService.saveState({messages: this.messages},"music");
+    this.promt=""
+  }
+  ClearChat(){
+    this.stateService.clearService("music")
+    this.messages=[]
   }
 }
 

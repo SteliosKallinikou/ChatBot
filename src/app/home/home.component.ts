@@ -3,8 +3,7 @@ import {ChatBotAiService} from '../service/chat-bot-ai.service';
 import {FormsModule} from '@angular/forms';
 import {MatProgressBar} from '@angular/material/progress-bar';
 import {StateService} from '../service/state-service';
-import {JsonPipe} from '@angular/common';
-
+import {HighlightPipe} from '../../pipes/highlight.pipe';
 
 
 @Component({
@@ -12,7 +11,7 @@ import {JsonPipe} from '@angular/common';
   imports: [
     FormsModule,
     MatProgressBar,
-    JsonPipe,
+    HighlightPipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -23,42 +22,25 @@ export class HomeComponent implements OnInit{
   AIService = inject(ChatBotAiService)
   promt: string=''
   isLoading=false
+  paragraph:string= "this is a test **paragraph** that **with** stars"
 
 
   ngOnInit() {
-    const state = this.stateService.getState()
+    const state = this.stateService.getState("general")
     this.messages=state.messages
   }
 
   async sendMessage(userMessage: string){
-    // Add the user's message to the chat
     this.messages.push({sender: 'user', message: userMessage});
-    this.promt=userMessage
     this.isLoading=true
     const botMessage = await this.AIService.getResponse(userMessage).then()
     this.messages.push({sender: 'bot', message: botMessage});
     this.isLoading=false
-    // Save the state
-    this.stateService.saveState({messages: this.messages});
+    this.stateService.saveState({messages: this.messages},"general");
+    this.promt=""
   }
-
-
-  // promt = ''
-  // response: string | undefined
-  // chatMessages: string[]=[]
-  // promts: string[]=[]
-  // isLoading=false
-  // constructor(private AIService: ChatBotAiService) {
-  // }
-  // async getComplete(input:string) {
-  //   this.isLoading=true
-  //   this.response = await this.AIService.getResponse(this.promt).then()
-  //   this.promts.push(input)
-  //   if (this.response != null) {
-  //     this.isLoading=false
-  //     this.chatMessages.push(this.response)
-  //     this.promt=""
-  //   }
-  //
-  // }
+  ClearChat(){
+    this.stateService.clearService("general")
+    this.messages=[]
+  }
 }

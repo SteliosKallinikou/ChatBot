@@ -6,14 +6,17 @@ import {Injectable} from '@angular/core';
 })
 
 export class StateService {
-  private stateKey='chatState';
 
-  getState(){
-    const savedState = localStorage.getItem(this.stateKey)
+  getState(stateKey:string){
+    const savedState = localStorage.getItem(stateKey)
     return savedState ? JSON.parse(savedState): {messages:[]}
   }
 
-  saveState(state:any){
-  localStorage.setItem(this.stateKey, JSON.stringify(state))
+  saveState(state:any,stateKey:string){
+  localStorage.setItem(stateKey, JSON.stringify(state))
+  }
+
+  clearService(stateKey:string){
+    localStorage.removeItem(stateKey)
   }
 }

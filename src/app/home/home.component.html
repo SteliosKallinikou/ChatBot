@@ -1,12 +1,24 @@
-<h1 class="title"  >General Chat-Bot</h1>
 <div class="container">
-  <div>
+  <div class="message">
     @for (message of messages; track $index) {
-      <p class="user-input-display"><b>You:</b> {{promt}}</p>
-      <div class="reply">
-        <b>Chat: </b>{{message| json}}
-      </div>
+      @if (messages[$index].sender=="user"){
+        <div class="user-input-display">
+          <h3><b>You:</b></h3>
+          <p class="user-text">{{messages[$index].message}}</p>
+        </div>
+      } @else if (messages[$index].sender=="bot"){
+        <div class="reply">
+          <h3><b>Chat: </b></h3>
+          <p  [innerHTML]="message.message!|highlight" ></p>
+          <hr>
+        </div>
+      }
     }
+
+    @if(messages.length==0){
+      <h3>What can I help you with?</h3>
+    }
+
     @if (isLoading) {
       <div class="loader-container">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -14,6 +26,7 @@
       }
   </div>
   <div class="submit">
+    <button class="submit-button" (click)="ClearChat()" >Clear Chat</button>
     <textarea class="input" [(ngModel)]=promt (keydown.enter)="sendMessage(promt)" rows="2" cols="55" placeholder="Ask Me Anything!?"></textarea>
     <button class="submit-button" (click)="sendMessage(promt)" >Generate</button>
   </div>
