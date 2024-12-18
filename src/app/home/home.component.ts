@@ -6,10 +6,6 @@ import {StateService} from '../shared/service/state-service';
 import {MusicComponent} from '../music/music.component';
 import {RouterOutlet} from '@angular/router';
 
-
-
-
-
 @Component({
   selector: 'app-home',
   imports: [

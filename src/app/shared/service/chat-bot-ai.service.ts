@@ -21,9 +21,9 @@ export class ChatBotAiService {
     return <string>this.ChatTypeTokens.get(chatType)
   }
 
-  async getResponse(prompt: string, name: string) {
+  async getResponse(prompt: string, id: string) {
 
-    if(name=="Math-chat"){
+    if(id== "Math-Chat"){
       const MathAssistant = await this.openai.beta.assistants.retrieve(this.getTokenBasedOnChatType(ChatType.MATH))
       let thread = await this.openai.beta.threads.create()
       let message = await this.openai.beta.threads.messages.create(thread.id, {
@@ -45,17 +45,16 @@ export class ChatBotAiService {
         }
       }
       return this.output
-
     }
 
-    if (name === "Music-chat") {
-      const MusicAssistant = await this.openai.beta.assistants.retrieve(this.getTokenBasedOnChatType(ChatType.MUSIC))
+    if (id == 'Music-Chat') {
+      console.log("here")
+      const MusicAssistant = await this.openai.beta.assistants.retrieve('asst_buRnGd1d5BeiSbQ6mfjXkItp')
       let thread = await this.openai.beta.threads.create()
       let message = await this.openai.beta.threads.messages.create(thread.id, {
         role: "user",
         content: prompt
       })
-
       let run = await this.openai.beta.threads.runs.createAndPoll(thread.id, {
         assistant_id: MusicAssistant.id
       })
@@ -65,10 +64,10 @@ export class ChatBotAiService {
         for (const message of messages.data.reverse()) {
           if (message.content[0].type == 'text') {
             this.output = message.content[0].text.value
-            return this.output
           }
         }
       }
+      return this.output
     }
 
     const chatCompletion = await this.openai.chat.completions.create({
