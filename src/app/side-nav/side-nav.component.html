@@ -5,9 +5,9 @@
   <mat-sidenav [(opened)]="opened" mode="push" >
   <mat-list>
     <label>Menu Items</label>
-    <mat-list-item>  <a routerLink="/generalChat">General Bot</a> </mat-list-item>
-    <mat-list-item>  <a routerLink="/musicChat">Music Bot</a> </mat-list-item>
-    <mat-list-item>  <a routerLink="/mathChat">Math Bot</a> </mat-list-item>
+    <mat-list-item>  <a (click)="ChatClick('/GeneralChat','General')">General Bot</a> </mat-list-item>
+    <mat-list-item>  <a (click)="ChatClick('/GeneralChat','Music-Chat')">Music Bot</a> </mat-list-item>
+    <mat-list-item>  <a  (click)="ChatClick('/GeneralChat','Math-Chat')" >Math Bot</a> </mat-list-item>
   </mat-list>
   </mat-sidenav>
   <router-outlet/>

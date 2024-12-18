@@ -1,22 +1,25 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {MusicComponent} from './music/music.component';
-import {MathComponent} from './math/math.component';
+import {HomeComponent} from './home/home.component'
 
 
 export const routes: Routes = [
   {
-    path: "generalChat",
-    component: HomeComponent
+    path: "GeneralChat",
+    children:[
+      {
+        path:'',
+        component: HomeComponent
+      },
+      {
+        path:':name',
+        component: HomeComponent
+      }
+    ]
   },
   {
-    path: "musicChat",
-    component: MusicComponent
-  },
-  {
-    path: "mathChat",
-    component: MathComponent
+    path:'',
+    redirectTo:'/GeneralChat',
+    pathMatch: "full"
   }
-
 ];
 

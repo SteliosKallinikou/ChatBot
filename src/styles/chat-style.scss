@@ -40,9 +40,10 @@ body{
     background: transparent;
     margin-left: 1px;
     color: white;
-  }
-  .submit-button:hover{
-    background-color: #686868;
+
+    &:hover{
+      background-color: #686868;
+    }
   }
 }
 .user-input-display{
@@ -65,22 +66,23 @@ body{
   text-align: start;
   padding: 0 110px variables.$small-plus 0;
   animation: slow 10s ease forwards;
+
+  @keyframes slow {
+    0%{
+      max-width: 0;
+    }
+    30%{
+      max-width: 50%;
+    }
+    60%{
+      max-width: 80%;
+    }
+    100%{
+      max-width: 100%;
+    }
+  }
 }
 
-@keyframes slow {
-  0%{
-    max-width: 0;
-  }
-  30%{
-    max-width: 50%;
-  }
-  60%{
-    max-width: 80%;
-  }
-  100%{
-    max-width: 100%;
-  }
-}
 
 .loader-container{
   color: #8341c1;
@@ -101,3 +103,20 @@ strong{
   border-radius: variables.$medium-plus;
   padding: variables.$medium-plus;
 }
+
+.welcome-message{
+  animation: fade-out 10s forwards;
+
+  @keyframes fade-out {
+    from{
+      opacity: 1;
+    }
+    to{
+      opacity: 0;
+
+    }
+
+  }
+}
+
+

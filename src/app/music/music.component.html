@@ -1,34 +1,12 @@
-<h1 class="title">Music Assistant</h1>
-<div class="container">
-  <div class="message">
-    @for (message of messages; track $index) {
-      @if (message.sender=="user"){
-        <div class="user-input-display">
-          <h3><b>You:</b></h3>
-          <p class="user-text">{{message.message}}</p>
-        </div>
-      } @else if (message.sender=="bot"){
-        <div class="reply">
-          <h3><b>Chat: </b></h3>
-          <p  [innerHTML]="message.message!|highlight" ></p>
-          <hr>
-        </div>
-      }
-    } @empty {
-      <h3>Ask me Anything about Music that you would like to know i am your personal Music Assistant</h3>
-    }
-
-
-    @if (isLoading) {
-      <div class="loader-container">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </div>
-    }
+@if (sender()=="user"){
+  <div class="user-input-display">
+    <h3><b>You:</b></h3>
+    <p class="user-text">{{message()}}</p>
   </div>
-  <div class="submit">
-    <button class="submit-button" (click)="ClearChat()" >Clear Chat</button>
-    <textarea class="input" [(ngModel)]=promt (keydown.enter)="sendMessage(promt)" rows="2" cols="55" placeholder="Ask Me Anything!?"></textarea>
-    <button class="submit-button" (click)="sendMessage(promt)" >Generate</button>
+} @else if (sender()=="bot"){
+  <div class="reply">
+    <h3><b>Chat: </b></h3>
+    <p  [innerHTML]="message()!|highlight" ></p>
+    <hr>
   </div>
-</div>
-
+}
