@@ -1,15 +1,22 @@
 <mat-sidenav-container>
-    <mat-toolbar-row>
-      <button mat-flat-button (click)="opened=true" style="color: white; position: fixed">ChatBot<mat-icon>menu</mat-icon></button>
-    </mat-toolbar-row>
-  <mat-sidenav [(opened)]="opened" mode="push" >
-  <mat-list>
-    <label>Menu Items</label>
-    <mat-list-item>  <a (click)="ChatClick('/GeneralChat','General-Chat')">General Bot</a> </mat-list-item>
-    <mat-list-item>  <a (click)="ChatClick('/GeneralChat','Music-Chat')">Music Bot</a> </mat-list-item>
-    <mat-list-item>  <a  (click)="ChatClick('/GeneralChat','Math-Chat')" >Math Bot</a> </mat-list-item>
-  </mat-list>
+  <mat-toolbar-row>
+    <button mat-flat-button (click)="opened = true" style="color: white; position: fixed">
+      ChatBot<mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar-row>
+  <mat-sidenav [(opened)]="opened" mode="push">
+    <mat-list>
+      <label>Menu Items</label>
+      <mat-list-item>
+        <a (click)="ChatClick('/GeneralChat', 'General-Chat')">General Bot</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a (click)="ChatClick('/GeneralChat', 'Music-Chat')">Music Bot</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a (click)="ChatClick('/GeneralChat', 'Math-Chat')">Math Bot</a>
+      </mat-list-item>
+    </mat-list>
   </mat-sidenav>
-  <router-outlet/>
+  <router-outlet />
 </mat-sidenav-container>
-

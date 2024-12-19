@@ -1,6 +1,4 @@
 export interface messages {
   sender: string;
-  message:string;
+  message: string;
 }
-
-

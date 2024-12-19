@@ -1,12 +1,12 @@
-@if (sender()=="user"){
+@if (sender() === 'user') {
   <div class="user-input-display">
     <h3><b>You:</b></h3>
-    <p class="user-text">{{message()}}</p>
+    <p class="user-text">{{ message() }}</p>
   </div>
-} @else if (sender()=="bot"){
+} @else if (sender() === 'bot') {
   <div class="reply">
     <h3><b>Chat: </b></h3>
-    <p  [innerHTML]="message()!|highlight" ></p>
-    <hr>
+    <p [innerHTML]="message()! | highlight"></p>
+    <hr />
   </div>
 }

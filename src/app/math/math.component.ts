@@ -1,13 +1,10 @@
-import {Component} from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-math',
-  imports: [
-    FormsModule
-  ],
+  imports: [FormsModule],
   templateUrl: './math.component.html',
-  styleUrl: './math.component.scss'
+  styleUrl: './math.component.scss',
 })
-export class MathComponent {
-}
+export class MathComponent {}
