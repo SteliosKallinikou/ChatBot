@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 import { MatButton } from '@angular/material/button';
 import { MatList, MatListItem } from '@angular/material/list';
@@ -15,7 +15,10 @@ import { MatIcon } from '@angular/material/icon';
 export class SideNavComponent {
   private router = inject(Router);
   opened = false;
-  ChatClick(route: string, name: string): void {
+  onChatClick(route: string, name: string): void {
     this.router.navigate([route, name]);
+  }
+  onMenuClick() {
+    this.opened = true;
   }
 }

@@ -1,11 +1,11 @@
 import { Component, effect, ElementRef, inject, input, ViewChild } from '@angular/core';
-import { ChatBotAiService } from '../shared/service/chat-bot-ai.service';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { StateService } from '../shared/service/state-service';
 import { MusicComponent } from '../music/music.component';
 import { RouterOutlet } from '@angular/router';
 import { messages } from '../shared';
+import { ResponseService } from '../shared/service/response-service.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,7 @@ import { messages } from '../shared';
 })
 export class HomeComponent {
   stateService = inject(StateService);
-  AIService = inject(ChatBotAiService);
+  responseService = inject(ResponseService);
   name = input.required<string>();
   welcomeChange = input.required<boolean>();
   @ViewChild('changes') change!: ElementRef;
@@ -23,21 +23,21 @@ export class HomeComponent {
   messages: messages[] = [];
   prompt = '';
   isLoading = false;
-  WelcomeMessage = '';
+  welcomeMessage = '';
 
   constructor() {
     effect(() => {
       const state = this.stateService.getState(this.name());
       this.messages = state.messages;
-      this.WelcomeMessage = 'Welcome to ' + this.name();
-      this.Restart();
+      this.welcomeMessage = 'Welcome to ' + this.name();
+      this.onRestart();
     });
   }
 
-  async sendMessage(userMessage: string) {
+  async sendMessage(userMessage: string): Promise<void> {
     this.messages.push({ sender: 'user', message: userMessage });
     this.isLoading = true;
-    const botMessage = await this.AIService.getResponse(userMessage, this.name()).then();
+    const botMessage = await this.responseService.getResponse(userMessage, this.name()).then();
     if (botMessage != null) {
       this.messages.push({ sender: 'bot', message: botMessage });
       this.isLoading = false;
@@ -47,12 +47,12 @@ export class HomeComponent {
     this.prompt = '';
   }
 
-  ClearChat() {
+  clearChat(): void {
     this.stateService.clearService(this.name());
     this.messages = [];
   }
 
-  Restart() {
+  onRestart(): void {
     const element = this.change.nativeElement;
     element.style.animation = 'none';
     void element.offsetWidth;

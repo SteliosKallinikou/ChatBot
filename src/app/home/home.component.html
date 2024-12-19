@@ -12,9 +12,9 @@
     }
   </div>
 
-  <p class="welcome-message" #changes>{{ WelcomeMessage }}</p>
+  <p class="welcome-message" #changes>{{ welcomeMessage }}</p>
   <div class="submit">
-    <button class="submit-button" (click)="ClearChat()">Clear Chat</button>
+    <button class="submit-button" (click)="clearChat()">Clear Chat</button>
     <textarea
       class="input"
       [(ngModel)]="prompt"

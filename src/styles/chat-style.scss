@@ -1,7 +1,4 @@
 @use 'variables';
-body {
-  background-color: #424242;
-}
 
 .title {
   color: white;
@@ -29,11 +26,11 @@ body {
     color: white;
     padding-top: variables.$small;
     resize: none;
+    &:focus {
+      outline: none;
+    }
   }
 
-  .input:focus {
-    outline: none;
-  }
   .submit-button {
     border: #8341c1;
     border-radius: variables.$medium-plus;
@@ -92,10 +89,11 @@ body {
   margin: 0 20% 5% 20%;
 }
 
-strong {
+.highlights {
   background-color: #565656;
   border-radius: variables.$medium-plus;
   padding: 5px;
+  font-weight: bold;
 }
 
 .user-text {
