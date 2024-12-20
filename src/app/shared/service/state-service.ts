@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
+import { state } from '../model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StateService {
-  getState(stateKey: string): any {
+  getState(stateKey: string): state {
     const savedState = localStorage.getItem(stateKey);
-    return savedState ? JSON.parse(savedState) : { messages: [] };
+    return savedState ? (JSON.parse(savedState) as state) : { messages: [] };
   }
 
-  saveState(state: any, stateKey: string): void {
+  saveState(state: state, stateKey: string): void {
     localStorage.setItem(stateKey, JSON.stringify(state));
   }
 

@@ -3,7 +3,12 @@ import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   {
-    path: 'General-Chat',
+    path: '',
+    redirectTo: '/general-chat/general-chat',
+    pathMatch: 'full',
+  },
+  {
+    path: 'general-chat',
     children: [
       {
         path: '',
@@ -16,8 +21,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: '',
-    redirectTo: '/General-Chat/General-Chat',
-    pathMatch: 'full',
+    path: '**',
+    redirectTo: '/general-chat/general-chat',
   },
 ];

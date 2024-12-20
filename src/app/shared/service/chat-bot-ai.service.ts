@@ -2,21 +2,17 @@ import { Injectable } from '@angular/core';
 import { environment } from '../enviroment';
 import OpenAI from 'openai';
 import { ChatType, SenderTypes } from '../enums';
+import { ChatTypeTokens } from '../consts';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ChatBotAiService {
   openai = new OpenAI({ apiKey: environment.openaiApiKey, dangerouslyAllowBrowser: true });
   output: string | undefined;
-  content: string | null | undefined;
-
-  ChatTypeTokens = new Map<ChatType, string>([
-    [ChatType.MUSIC, 'asst_buRnGd1d5BeiSbQ6mfjXkItp'],
-    [ChatType.MATH, 'asst_DfT8WtbYfzjmoyGaflPMXoWZ'],
-  ]);
 
   getTokenBasedOnChatType(chatType: ChatType): string {
-    return <string>this.ChatTypeTokens.get(chatType);
+    return <string>ChatTypeTokens.get(chatType);
   }
 
   async getMathAssistant(prompt: string): Promise<string | undefined> {
@@ -43,7 +39,7 @@ export class ChatBotAiService {
   }
 
   async getMusicAssistant(prompt: string): Promise<string | undefined> {
-    const MusicAssistant = await this.openai.beta.assistants.retrieve('asst_buRnGd1d5BeiSbQ6mfjXkItp');
+    const MusicAssistant = await this.openai.beta.assistants.retrieve(this.getTokenBasedOnChatType(ChatType.MUSIC));
     let thread = await this.openai.beta.threads.create();
     let message = await this.openai.beta.threads.messages.create(thread.id, {
       role: SenderTypes.USER,

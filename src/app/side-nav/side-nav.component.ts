@@ -14,11 +14,13 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class SideNavComponent {
   private router = inject(Router);
-  opened = false;
+  isMenuOpened = false;
+
   onChatClick(route: string, name: string): void {
     this.router.navigate([route, name]);
   }
-  onMenuClick() {
-    this.opened = true;
+
+  onMenuClick(): void {
+    this.isMenuOpened = true;
   }
 }

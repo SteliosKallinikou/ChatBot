@@ -7,11 +7,11 @@ import { ChatBotAiService } from './chat-bot-ai.service';
 export class ResponseService {
   chatBotService = inject(ChatBotAiService);
 
-  async getResponse(prompt: string, id: string) {
-    if (id === 'Music-Chat') {
+  async getResponse(prompt: string, id: string): Promise<string | undefined | null> {
+    if (id === 'music-chat') {
       return this.chatBotService.getMusicAssistant(prompt);
     }
-    if (id === 'Math-Chat') {
+    if (id === 'math-chat') {
       return this.chatBotService.getMathAssistant(prompt);
     } else {
       return this.chatBotService.getGeneralChat(prompt);

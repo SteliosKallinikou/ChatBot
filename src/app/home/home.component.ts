@@ -17,13 +17,12 @@ export class HomeComponent {
   stateService = inject(StateService);
   responseService = inject(ResponseService);
   name = input.required<string>();
-  welcomeChange = input.required<boolean>();
   @ViewChild('changes') change!: ElementRef;
 
   messages: messages[] = [];
   prompt = '';
-  isLoading = false;
   welcomeMessage = '';
+  isLoading = false;
 
   constructor() {
     effect(() => {

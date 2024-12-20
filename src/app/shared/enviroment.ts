@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   openaiApiKey:
-    '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',
+    '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',
 };

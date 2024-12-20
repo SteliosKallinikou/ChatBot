@@ -1,11 +1,11 @@
 @if (sender() === SenderTypes.USER) {
   <div class="user-input-display">
-    <h3><b>You:</b></h3>
+    <h3 class="sender-style">You:</h3>
     <p class="user-text">{{ message() }}</p>
   </div>
 } @else if (sender() === SenderTypes.BOT) {
   <div class="reply">
-    <h3><b>Chat: </b></h3>
+    <h3 class="sender-style">Chat:</h3>
     <p [innerHTML]="message()! | highlight"></p>
     <hr />
   </div>

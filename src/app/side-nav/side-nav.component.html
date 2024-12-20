@@ -1,20 +1,18 @@
 <mat-sidenav-container>
-  <mat-toolbar-row>
-    <button mat-flat-button (click)="onMenuClick()" style="color: white; position: fixed">
-      ChatBot<mat-icon>menu</mat-icon>
-    </button>
+  <mat-toolbar-row class="menu-button">
+    <button mat-flat-button (click)="onMenuClick()">ChatBot<mat-icon>menu</mat-icon></button>
   </mat-toolbar-row>
-  <mat-sidenav [(opened)]="opened" mode="push">
+  <mat-sidenav [(opened)]="isMenuOpened" mode="push">
     <mat-list>
       <label class="menu-label">Menu Items</label>
       <mat-list-item>
-        <a (click)="onChatClick('/General-Chat', 'General-Chat')">General Bot</a>
+        <a (click)="onChatClick('/general-chat', 'general-chat')">General Bot</a>
       </mat-list-item>
       <mat-list-item>
-        <a (click)="onChatClick('/General-Chat', 'Music-Chat')">Music Bot</a>
+        <a (click)="onChatClick('/general-chat', 'music-chat')">Music Bot</a>
       </mat-list-item>
       <mat-list-item>
-        <a (click)="onChatClick('/General-Chat', 'Math-Chat')">Math Bot</a>
+        <a (click)="onChatClick('/general-chat', 'math-chat')">Math Bot</a>
       </mat-list-item>
     </mat-list>
   </mat-sidenav>
