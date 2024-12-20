@@ -1,4 +1,4 @@
 export enum ChatType {
-  MUSIC = 'music',
-  MATH = 'math',
+  MUSIC = 'music-chat',
+  MATH = 'math-chat',
 }

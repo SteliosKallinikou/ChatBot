@@ -5,6 +5,7 @@ import { MatList, MatListItem } from '@angular/material/list';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatToolbarRow } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
+import { ChatType } from '../shared/enums';
 
 @Component({
   selector: 'app-side-nav',
@@ -23,4 +24,6 @@ export class SideNavComponent {
   onMenuClick(): void {
     this.isMenuOpened = true;
   }
+
+  protected readonly ChatType = ChatType;
 }

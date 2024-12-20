@@ -9,10 +9,10 @@
         <a (click)="onChatClick('/general-chat', 'general-chat')">General Bot</a>
       </mat-list-item>
       <mat-list-item>
-        <a (click)="onChatClick('/general-chat', 'music-chat')">Music Bot</a>
+        <a (click)="onChatClick('/general-chat', ChatType.MUSIC)">Music Bot</a>
       </mat-list-item>
       <mat-list-item>
-        <a (click)="onChatClick('/general-chat', 'math-chat')">Math Bot</a>
+        <a (click)="onChatClick('/general-chat', ChatType.MATH)">Math Bot</a>
       </mat-list-item>
     </mat-list>
   </mat-sidenav>

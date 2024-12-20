@@ -1,5 +1,7 @@
+import { SenderTypes } from './enums';
+
 export interface messages {
-  sender: string;
+  sender: SenderTypes;
   message: string;
 }
 

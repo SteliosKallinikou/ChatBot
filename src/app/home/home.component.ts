@@ -6,6 +6,7 @@ import { MusicComponent } from '../music/music.component';
 import { RouterOutlet } from '@angular/router';
 import { messages } from '../shared';
 import { ResponseService } from '../shared/service/response-service.service';
+import { SenderTypes } from '../shared/enums';
 
 @Component({
   selector: 'app-home',
@@ -34,11 +35,11 @@ export class HomeComponent {
   }
 
   async sendMessage(userMessage: string): Promise<void> {
-    this.messages.push({ sender: 'user', message: userMessage });
+    this.messages.push({ sender: SenderTypes.USER, message: userMessage });
     this.isLoading = true;
     const botMessage = await this.responseService.getResponse(userMessage, this.name()).then();
     if (botMessage != null) {
-      this.messages.push({ sender: 'bot', message: botMessage });
+      this.messages.push({ sender: SenderTypes.BOT, message: botMessage });
       this.isLoading = false;
     }
 
