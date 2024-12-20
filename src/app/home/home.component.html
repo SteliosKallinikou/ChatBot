@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="message">
+    @for (message of messages; track $index) {
+      <app-music [message]="message.message" [sender]="message.sender"></app-music>
+    } @empty {
+      <h3>What can I help you with?</h3>
+    }
+    @if (isLoading) {
+      <div class="loader-container">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    }
+  </div>
+
+  <p class="welcome-message" #changes>{{ welcomeMessage }}</p>
+  <div class="submit">
+    <button class="submit-button" (click)="clearChat()">Clear Chat</button>
+    <textarea
+      class="input"
+      [(ngModel)]="prompt"
+      (keydown.enter)="sendMessage(prompt)"
+      rows="2"
+      cols="55"
+      placeholder="Ask Me Anything!?"
+    ></textarea>
+    <button class="submit-button" (click)="sendMessage(prompt)">Generate</button>
+  </div>
+</div>
+<router-outlet></router-outlet>
